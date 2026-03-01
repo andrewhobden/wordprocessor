@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Word Processor - Basic Functionality', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('http://localhost:5175/');
+    await page.goto('/');
   });
 
   test('should load the application', async ({ page }) => {
@@ -143,7 +143,7 @@ test.describe('Word Processor - Basic Functionality', () => {
 
 test.describe('Word Processor - UI Elements', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('http://localhost:5175/');
+    await page.goto('/');
   });
 
   test('should have a visible interface', async ({ page }) => {
@@ -188,7 +188,7 @@ test.describe('Word Processor - UI Elements', () => {
 
 test.describe('Word Processor - Accessibility', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('http://localhost:5175/');
+    await page.goto('/');
   });
 
   test('editor should be keyboard accessible', async ({ page }) => {
@@ -213,7 +213,7 @@ test.describe('Word Processor - Accessibility', () => {
 
 test.describe('Word Processor - Performance', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('http://localhost:5175/');
+    await page.goto('/');
   });
 
   test('should load within acceptable time', async ({ page }) => {
