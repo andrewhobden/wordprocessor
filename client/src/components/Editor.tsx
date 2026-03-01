@@ -8,6 +8,8 @@ import { Color } from '@tiptap/extension-color'
 import { FontFamily } from '@tiptap/extension-font-family'
 import { useEffect, useCallback, useRef } from 'react'
 import { saveDocument, getDocument } from '../lib/storage'
+import { FontSize } from '../extensions/FontSize'
+import { Toolbar } from './Toolbar'
 
 interface EditorProps {
   documentId: string
@@ -28,6 +30,7 @@ export const Editor = ({ documentId, onTitleChange }: EditorProps) => {
       TextStyle,
       Color,
       FontFamily,
+      FontSize,
     ],
     content: '',
   })
@@ -95,26 +98,9 @@ export const Editor = ({ documentId, onTitleChange }: EditorProps) => {
   }
 
   return (
-    <div className="editor-wrapper">
-      <div className="toolbar">
-        <button
-          onClick={() => editor.chain().focus().toggleBulletList().run()}
-          className={editor.isActive('bulletList') ? 'is-active' : ''}
-          title="Bullet List"
-        >
-          •
-        </button>
-        <button
-          onClick={() => editor.chain().focus().toggleOrderedList().run()}
-          className={editor.isActive('orderedList') ? 'is-active' : ''}
-          title="Numbered List"
-        >
-          1.
-        </button>
-      </div>
-      <div className="editor-container">
-        <EditorContent editor={editor} />
-      </div>
+    <div className="editor-container">
+      <Toolbar editor={editor} />
+      <EditorContent editor={editor} />
     </div>
   )
 }
