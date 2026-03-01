@@ -90,9 +90,31 @@ export const Editor = ({ documentId, onTitleChange }: EditorProps) => {
     }
   }, [editor, saveDoc])
 
+  if (!editor) {
+    return null
+  }
+
   return (
-    <div className="editor-container">
-      <EditorContent editor={editor} />
+    <div className="editor-wrapper">
+      <div className="toolbar">
+        <button
+          onClick={() => editor.chain().focus().toggleBulletList().run()}
+          className={editor.isActive('bulletList') ? 'is-active' : ''}
+          title="Bullet List"
+        >
+          •
+        </button>
+        <button
+          onClick={() => editor.chain().focus().toggleOrderedList().run()}
+          className={editor.isActive('orderedList') ? 'is-active' : ''}
+          title="Numbered List"
+        >
+          1.
+        </button>
+      </div>
+      <div className="editor-container">
+        <EditorContent editor={editor} />
+      </div>
     </div>
   )
 }
