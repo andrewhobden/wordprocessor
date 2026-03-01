@@ -28,6 +28,36 @@ function App() {
     },
   })
 
+  const exportToPlainText = () => {
+    if (!editor) return
+    const text = editor.getText()
+    downloadFile(text, 'document.txt', 'text/plain')
+  }
+
+  const exportToHTML = () => {
+    if (!editor) return
+    const html = editor.getHTML()
+    downloadFile(html, 'document.html', 'text/html')
+  }
+
+  const exportToJSON = () => {
+    if (!editor) return
+    const json = JSON.stringify(editor.getJSON(), null, 2)
+    downloadFile(json, 'document.json', 'application/json')
+  }
+
+  const downloadFile = (content: string, filename: string, mimeType: string) => {
+    const blob = new Blob([content], { type: mimeType })
+    const url = URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = url
+    link.download = filename
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+    URL.revokeObjectURL(url)
+  }
+
   if (!editor) {
     return null
   }
@@ -51,6 +81,17 @@ function App() {
         </button>
       </div>
       <div className="editor-container">
+        <div className="export-toolbar">
+          <button onClick={exportToPlainText} className="export-button">
+            Export as Text
+          </button>
+          <button onClick={exportToHTML} className="export-button">
+            Export as HTML
+          </button>
+          <button onClick={exportToJSON} className="export-button">
+            Export as JSON
+          </button>
+        </div>
         <EditorContent editor={editor} />
       </div>
     </div>
