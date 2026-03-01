@@ -77,9 +77,62 @@
 .editor-container {
   border: 1px solid #e2e8f0;
   border-radius: 8px;
-  padding: 1rem;
-  min-height: 500px;
   background: white;
+}
+
+.toolbar {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border-bottom: 1px solid #e2e8f0;
+  background: #f8f9fa;
+  flex-wrap: wrap;
+}
+
+.toolbar-group {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+}
+
+.toolbar button {
+  padding: 0.4rem 0.8rem;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  background: white;
+  cursor: pointer;
+  font-size: 14px;
+  min-width: 32px;
+  transition: all 0.2s;
+}
+
+.toolbar button:hover {
+  background: #e5e7eb;
+  border-color: #9ca3af;
+}
+
+.toolbar button.is-active {
+  background: #3b82f6;
+  color: white;
+  border-color: #2563eb;
+}
+
+.toolbar-select {
+  padding: 0.4rem 0.6rem;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  background: white;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.toolbar-select:hover {
+  border-color: #9ca3af;
+}
+
+.editor-container .ProseMirror {
+  padding: 1rem;
+  min-height: 400px;
 }
 
 .tiptap {
