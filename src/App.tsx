@@ -26,6 +26,7 @@ function App() {
     onSelectionUpdate: () => {
       setUpdateCounter(c => c + 1)
     },
+    autofocus: 'end',
   })
 
   const exportToPlainText = () => {
