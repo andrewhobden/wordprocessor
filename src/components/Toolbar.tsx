@@ -9,17 +9,6 @@ export const Toolbar = ({ editor }: ToolbarProps) => {
     return null
   }
 
-  const fontFamilies = [
-    'Arial',
-    'Times New Roman',
-    'Courier New',
-    'Georgia',
-    'Verdana',
-    'Comic Sans MS',
-  ]
-
-  const fontSizes = ['12px', '14px', '16px', '18px', '20px', '24px', '28px', '32px']
-
   return (
     <div className="toolbar">
       <div className="toolbar-group">
@@ -28,57 +17,71 @@ export const Toolbar = ({ editor }: ToolbarProps) => {
           className={editor.isActive('bold') ? 'is-active' : ''}
           title="Bold"
         >
-          <strong>B</strong>
+          B
         </button>
         <button
           onClick={() => editor.chain().focus().toggleItalic().run()}
           className={editor.isActive('italic') ? 'is-active' : ''}
           title="Italic"
         >
-          <em>I</em>
+          I
         </button>
         <button
           onClick={() => editor.chain().focus().toggleUnderline().run()}
           className={editor.isActive('underline') ? 'is-active' : ''}
           title="Underline"
         >
-          <u>U</u>
+          U
         </button>
       </div>
 
       <div className="toolbar-group">
         <select
-          onChange={e => editor.chain().focus().setFontFamily(e.target.value).run()}
+          onChange={(e) => {
+            if (e.target.value === '') {
+              editor.chain().focus().unsetFontFamily().run()
+            } else {
+              editor.chain().focus().setFontFamily(e.target.value).run()
+            }
+          }}
           value={editor.getAttributes('textStyle').fontFamily || ''}
-          className="toolbar-select"
           title="Font Family"
         >
-          <option value="">Default Font</option>
-          {fontFamilies.map(font => (
-            <option key={font} value={font}>
-              {font}
-            </option>
-          ))}
+          <option value="">Default</option>
+          <option value="Inter">Inter</option>
+          <option value="Comic Sans MS, Comic Sans">Comic Sans</option>
+          <option value="serif">Serif</option>
+          <option value="monospace">Monospace</option>
+          <option value="cursive">Cursive</option>
         </select>
 
         <select
-          onChange={e => {
-            const size = e.target.value
-            if (size) {
-              editor.chain().focus().setFontSize(size).run()
+          onChange={(e) => {
+            const level = parseInt(e.target.value)
+            if (level === 0) {
+              editor.chain().focus().setParagraph().run()
             } else {
-              editor.chain().focus().unsetFontSize().run()
+              editor.chain().focus().toggleHeading({ level: level as 1 | 2 | 3 | 4 | 5 | 6 }).run()
             }
           }}
-          className="toolbar-select"
+          value={
+            editor.isActive('heading', { level: 1 }) ? '1' :
+            editor.isActive('heading', { level: 2 }) ? '2' :
+            editor.isActive('heading', { level: 3 }) ? '3' :
+            editor.isActive('heading', { level: 4 }) ? '4' :
+            editor.isActive('heading', { level: 5 }) ? '5' :
+            editor.isActive('heading', { level: 6 }) ? '6' :
+            '0'
+          }
           title="Font Size"
         >
-          <option value="">Default Size</option>
-          {fontSizes.map(size => (
-            <option key={size} value={size}>
-              {size}
-            </option>
-          ))}
+          <option value="0">Normal</option>
+          <option value="1">Heading 1</option>
+          <option value="2">Heading 2</option>
+          <option value="3">Heading 3</option>
+          <option value="4">Heading 4</option>
+          <option value="5">Heading 5</option>
+          <option value="6">Heading 6</option>
         </select>
       </div>
 
