@@ -6,6 +6,7 @@ import TextAlign from '@tiptap/extension-text-align'
 import { TextStyle } from '@tiptap/extension-text-style'
 import { Color } from '@tiptap/extension-color'
 import { FontFamily } from '@tiptap/extension-font-family'
+import { Toolbar } from './Toolbar'
 
 export const Editor = () => {
   const editor = useEditor({
@@ -27,6 +28,7 @@ export const Editor = () => {
 
   return (
     <div className="editor-container">
+      <Toolbar editor={editor} />
       <EditorContent editor={editor} />
     </div>
   )

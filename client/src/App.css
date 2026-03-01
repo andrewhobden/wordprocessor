@@ -36,3 +36,60 @@
   height: 0;
   pointer-events: none;
 }
+
+.toolbar {
+  display: flex;
+  gap: 1rem;
+  padding: 0.5rem;
+  border-bottom: 1px solid #e2e8f0;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.toolbar-group {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+}
+
+.toolbar button {
+  min-width: 2rem;
+  height: 2rem;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid #e2e8f0;
+  background: white;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.2s;
+}
+
+.toolbar button:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+.toolbar button.is-active {
+  background: #3b82f6;
+  color: white;
+  border-color: #3b82f6;
+}
+
+.toolbar select {
+  height: 2rem;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid #e2e8f0;
+  background: white;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+.toolbar select:hover {
+  border-color: #cbd5e1;
+}
+
+.toolbar select:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
