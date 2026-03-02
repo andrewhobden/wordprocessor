@@ -26,6 +26,7 @@ export const Editor = ({ documentId, onTitleChange }: EditorProps) => {
       Underline,
       TextAlign.configure({
         types: ['heading', 'paragraph'],
+        alignments: ['left', 'center', 'right', 'justify'],
       }),
       TextStyle,
       Color,
@@ -92,6 +93,37 @@ export const Editor = ({ documentId, onTitleChange }: EditorProps) => {
       }
     }
   }, [editor, saveDoc])
+
+  // Keyboard shortcuts for text alignment
+  useEffect(() => {
+    if (!editor) return
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.ctrlKey && event.shiftKey) {
+        switch (event.key.toLowerCase()) {
+          case 'l':
+            event.preventDefault()
+            editor.chain().focus().setTextAlign('left').run()
+            break
+          case 'e':
+            event.preventDefault()
+            editor.chain().focus().setTextAlign('center').run()
+            break
+          case 'r':
+            event.preventDefault()
+            editor.chain().focus().setTextAlign('right').run()
+            break
+          case 'j':
+            event.preventDefault()
+            editor.chain().focus().setTextAlign('justify').run()
+            break
+        }
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [editor])
 
   if (!editor) {
     return null
